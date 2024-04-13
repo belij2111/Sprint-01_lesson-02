@@ -9,6 +9,7 @@ export const SETTINGS = {
         POSTS: '/posts',
         TESTING: '/testing/all-data',
     },
+    ADMIN_AUTH: process.env.ADMIN_AUTH || ''
 }
 export const HTTP_STATUSES = {
     OK_200: 200,

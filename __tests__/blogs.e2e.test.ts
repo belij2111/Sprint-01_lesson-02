@@ -4,6 +4,9 @@ import {req} from "./test-helpers";
 import {blogDataset1} from "./blogs-datasets";
 
 describe('/blogs', () => {
+    beforeAll(async () => {
+        await req.delete('/testing/all-data')
+    })
     it(`should get empty array`, async () => {
         setDB()
         const res = await req

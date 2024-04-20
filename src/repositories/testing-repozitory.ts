@@ -1,10 +1,8 @@
-import {blogsDB, postsDB} from "../db/db"
+import {db} from "../db/db"
 
 export const testingRepository = {
-    deleteAllData: function () {
-        blogsDB.blogs = []
-        postsDB.posts = []
-
-        return {blogs: blogsDB.blogs, posts: postsDB.posts}
+    deleteAllData() {
+        db.blogs = []
+        db.posts = []
     }
 }

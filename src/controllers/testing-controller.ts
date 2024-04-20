@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../settings";
-import {blogsRepository} from "../repositories/blogs-repozitory";
 import {testingRepository} from "../repositories/testing-repozitory";
 
 export const testingController = (req: Request, res: Response) => {

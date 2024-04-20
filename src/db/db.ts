@@ -1,24 +1,22 @@
 import {BlogDBType} from "./blog-db-type";
 import {PostDbType} from "./post-db-type";
 
-export type blogsDBType = {
-    blogs: BlogDBType[]
-}
-export type postsDbType = {
+export type DBType = {
+    blogs: BlogDBType[],
     posts: PostDbType[]
 }
 
-export const blogsDB: blogsDBType = {
-    blogs: []
-}
-export const postsDB: postsDbType = {
+export const db: DBType = {
+    blogs: [],
     posts: []
 }
 
-export const setDB = (dataset?: Partial<blogsDBType>) => {
+export const setDB = (dataset?: Partial<DBType>) => {
     if (!dataset) {
-        blogsDB.blogs = []
+        db.blogs = []
+        db.posts = []
         return
     }
-    blogsDB.blogs = dataset.blogs || blogsDB.blogs
+    db.blogs = dataset.blogs || db.blogs
+    db.posts = dataset.posts || db.posts
 }

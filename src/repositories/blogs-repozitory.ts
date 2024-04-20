@@ -1,11 +1,33 @@
-import {blogsDB} from "../db/db"
+import {db} from "../db/db"
+import {OutputBlogType} from "../types/blog-types";
+import {BlogDBType} from "../db/blog-db-type";
 
 export const blogsRepository = {
-    getBlogs(name: string | null | undefined) {
-        let filteredBlogs = blogsDB.blogs
-        if (name) {
-            filteredBlogs = filteredBlogs.filter(e => e.name.indexOf(name) > 1)
-        }
-        return filteredBlogs
+    getBlogs(): OutputBlogType[] {
+        const blogs = db.blogs
+        blogs.map((blog) => {
+            return blogToView(blog)
+        })
+        return blogs
     },
+    getBlogById(id: string): OutputBlogType | null {
+        const blog =db.blogs.find((el) => {
+            if (el.id === id) {
+                return el
+            }
+            return
+        })
+        if(!blog) return null
+        return blogToView(blog)
+    }
+
+}
+
+function blogToView(blog:BlogDBType): OutputBlogType{
+    return {
+        id: blog.id,
+        name:blog.name,
+        description: blog.description,
+        websiteUrl: blog.websiteUrl
+    }
 }

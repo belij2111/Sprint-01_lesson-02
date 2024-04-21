@@ -6,27 +6,22 @@ export const blogsRepository = {
     getBlogs(): OutputBlogType[] {
         const blogs = db.blogs
         blogs.map((blog) => {
-            return blogToView(blog)
+            return blogMapToOutput(blog)
         })
         return blogs
     },
     getBlogById(id: string): OutputBlogType | null {
-        const blog =db.blogs.find((el) => {
-            if (el.id === id) {
-                return el
-            }
-            return
-        })
-        if(!blog) return null
-        return blogToView(blog)
+        const blog = db.blogs.find(p => p.id === id)
+        if (!blog) return null
+        return blogMapToOutput(blog)
     }
 
 }
 
-function blogToView(blog:BlogDBType): OutputBlogType{
+function blogMapToOutput(blog: BlogDBType): OutputBlogType {
     return {
         id: blog.id,
-        name:blog.name,
+        name: blog.name,
         description: blog.description,
         websiteUrl: blog.websiteUrl
     }

@@ -1,5 +1,5 @@
 import {db} from "../db/db"
-import {OutputBlogType} from "../types/blog-types";
+import {InputBlogType, OutputBlogType} from "../types/blog-types";
 import {BlogDBType} from "../db/blog-db-type";
 
 export const blogsRepository = {
@@ -11,11 +11,14 @@ export const blogsRepository = {
         return blogs
     },
     getBlogById(id: string): OutputBlogType | null {
-        const blog = db.blogs.find(p => p.id === id)
+        const blog = findById(id)
         if (!blog) return null
         return blogMapToOutput(blog)
     }
+}
 
+function findById(id: string) {
+    return db.blogs.find(p => p.id === id)
 }
 
 function blogMapToOutput(blog: BlogDBType): OutputBlogType {

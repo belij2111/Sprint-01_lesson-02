@@ -10,6 +10,16 @@ export const blogsRepository = {
         })
         return blogs
     },
+
+    createBlog(inputBlog: InputBlogType) {
+        const createNewBlog: BlogDBType = {
+            ...inputBlog,
+            id: crypto.randomUUID(),
+        }
+        db.blogs = [...db.blogs, createNewBlog]
+        return {id: createNewBlog.id}
+    },
+
     getBlogById(id: string): OutputBlogType | null {
         const blog = findById(id)
         if (!blog) return null

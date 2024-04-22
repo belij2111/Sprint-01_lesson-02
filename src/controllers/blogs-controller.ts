@@ -11,6 +11,14 @@ export const getBlogsController = (req: Request, res: Response<OutputBlogType[]>
         .json(allBlogs)
 }
 
+export const createBlogController = (req: Request, res: Response) => {
+    const createdInfo = blogsRepository.createBlog(req.body)
+    const newBlog = blogsRepository.getBlogById(createdInfo.id)
+    res
+        .status(HTTP_STATUSES.CREATED_201)
+        .json(newBlog)
+}
+
 export const getBlogByIdController = (req: Request, res: Response<OutputBlogType>) => {
     const blogId = req.params.id
     const blog = blogsRepository.getBlogById(blogId)
@@ -25,8 +33,3 @@ export const getBlogByIdController = (req: Request, res: Response<OutputBlogType
         .status(HTTP_STATUSES.OK_200)
         .json(blog)
 }
-
-
-// export const createBlogController = (req: Request<any, any, InputBlogType>, res: Response<OutputBlogType | OutputErrorsType>) => {
-//
-// }

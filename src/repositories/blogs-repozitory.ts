@@ -24,6 +24,15 @@ export const blogsRepository = {
         const blog = findById(id)
         if (!blog) return null
         return blogMapToOutput(blog)
+    },
+
+    updateBlogById(id: string, inputBlog: InputBlogType) {
+        const updateBlog = findById(id)
+        if (!updateBlog) return null
+        updateBlog.name = inputBlog.name
+        updateBlog.description = inputBlog.description
+        updateBlog.websiteUrl = inputBlog.websiteUrl
+        return true
     }
 }
 

@@ -3,6 +3,7 @@ import {InputBlogType, OutputBlogType} from "../types/blog-types";
 import {HTTP_STATUSES} from "../settings";
 import {blogsRepository} from "../repositories/blogs-repozitory";
 import {OutputErrorsType} from "../types/output-errors-type";
+import exp from "node:constants";
 
 export const getBlogsController = (req: Request, res: Response<OutputBlogType[]>) => {
     const allBlogs = blogsRepository.getBlogs()
@@ -32,4 +33,17 @@ export const getBlogByIdController = (req: Request, res: Response<OutputBlogType
     res
         .status(HTTP_STATUSES.OK_200)
         .json(blog)
+}
+
+export const updateBlogByIdController = (req: Request<{ id: string }, {}, InputBlogType>, res: Response) => {
+    const updateBlogId = blogsRepository.updateBlogById(req.params.id, req.body)
+    if (!updateBlogId) {
+        res
+            .status(HTTP_STATUSES.NOT_FOUND_404)
+            .json({})
+        return
+    }
+    res
+        .status(HTTP_STATUSES.NO_CONTENT_204)
+        .json({message: "successfully updated"})
 }

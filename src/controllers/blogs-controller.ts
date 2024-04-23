@@ -4,6 +4,7 @@ import {HTTP_STATUSES} from "../settings";
 import {blogsRepository} from "../repositories/blogs-repozitory";
 import {OutputErrorsType} from "../types/output-errors-type";
 import exp from "node:constants";
+import {req} from "../../__tests__/test-helpers";
 
 export const getBlogsController = (req: Request, res: Response<OutputBlogType[]>) => {
     const allBlogs = blogsRepository.getBlogs()
@@ -36,8 +37,8 @@ export const getBlogByIdController = (req: Request, res: Response<OutputBlogType
 }
 
 export const updateBlogByIdController = (req: Request<{ id: string }, {}, InputBlogType>, res: Response) => {
-    const updateBlogId = blogsRepository.updateBlogById(req.params.id, req.body)
-    if (!updateBlogId) {
+    const updateBlog = blogsRepository.updateBlogById(req.params.id, req.body)
+    if (!updateBlog) {
         res
             .status(HTTP_STATUSES.NOT_FOUND_404)
             .json({})
@@ -46,4 +47,17 @@ export const updateBlogByIdController = (req: Request<{ id: string }, {}, InputB
     res
         .status(HTTP_STATUSES.NO_CONTENT_204)
         .json({message: "successfully updated"})
+}
+
+export const deleteBlogByIdController = (req: Request<{ id: string }>, res: Response) => {
+    const deleteBlog = blogsRepository.deleteBlogById(req.params.id)
+    if (!deleteBlog) {
+        res
+            .status(HTTP_STATUSES.NOT_FOUND_404)
+            .json({message: 'Blog not found'})
+        return
+    }
+    res
+        .status(HTTP_STATUSES.NO_CONTENT_204)
+        .json({message: 'Blog deleted successfully'})
 }

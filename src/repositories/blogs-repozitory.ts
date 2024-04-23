@@ -33,11 +33,22 @@ export const blogsRepository = {
         updateBlog.description = inputBlog.description
         updateBlog.websiteUrl = inputBlog.websiteUrl
         return true
+    },
+
+    deleteBlogById(id: string) {
+        const findBlog = findById(id)
+        if (!findBlog) return null
+        db.blogs = deleteById(id)
+        return true
     }
 }
 
 function findById(id: string) {
     return db.blogs.find(p => p.id === id)
+}
+
+function deleteById(id: string) {
+    return db.blogs.filter(p => p.id !== id)
 }
 
 function blogMapToOutput(blog: BlogDBType): OutputBlogType {

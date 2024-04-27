@@ -5,11 +5,12 @@ import {
     getBlogsController,
     updateBlogByIdController
 } from "../controllers/blogs-controller";
+import {authMiddleware} from "../middlewares/authMiddleware";
 
 export const blogsRouter = Router()
 
 blogsRouter.get('/', getBlogsController)
-blogsRouter.post('/', createBlogController)
+blogsRouter.post('/', authMiddleware, createBlogController)
 blogsRouter.get('/:id', getBlogByIdController)
-blogsRouter.put('/:id', updateBlogByIdController)
-blogsRouter.delete('/:id', deleteBlogByIdController)
+blogsRouter.put('/:id', authMiddleware, updateBlogByIdController)
+blogsRouter.delete('/:id', authMiddleware, deleteBlogByIdController)

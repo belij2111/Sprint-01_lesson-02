@@ -3,7 +3,6 @@ import {HTTP_STATUSES, SETTINGS} from "../settings";
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const auth = req.headers['authorization'] as string
-    console.log(auth)
     if (!auth) {
         res
             .status(HTTP_STATUSES.UNAUTHORIZED_401)

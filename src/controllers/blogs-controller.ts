@@ -24,10 +24,10 @@ export const createBlogController = (req: Request, res: Response) => {
 export const getBlogByIdController = (req: Request, res: Response<OutputBlogType>) => {
     const blogId = req.params.id
     const blog = blogsRepository.getBlogById(blogId)
-
+    console.log(blog)
     if (!blog) {
         res
-            .status(HTTP_STATUSES.NOT_FOUND_404)
+            .sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
 
@@ -41,7 +41,7 @@ export const updateBlogByIdController = (req: Request<{ id: string }, {}, InputB
     if (!updateBlog) {
         res
             .status(HTTP_STATUSES.NOT_FOUND_404)
-            .json({})
+            .json({message: 'Blog not found'})
         return
     }
     res

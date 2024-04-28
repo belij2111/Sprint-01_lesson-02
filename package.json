@@ -8,6 +8,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-validator": "^7.0.1",
     "uuid": "^9.0.1"
   },
   "scripts": {
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/express-validator": "^3.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.6",
     "@types/supertest": "^6.0.2",

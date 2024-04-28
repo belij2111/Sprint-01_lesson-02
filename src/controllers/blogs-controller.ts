@@ -2,9 +2,6 @@ import {Request, Response} from "express";
 import {InputBlogType, OutputBlogType} from "../types/blog-types";
 import {HTTP_STATUSES} from "../settings";
 import {blogsRepository} from "../repositories/blogs-repozitory";
-import {OutputErrorsType} from "../types/output-errors-type";
-import exp from "node:constants";
-import {req} from "../../__tests__/test-helpers";
 
 export const getBlogsController = (req: Request, res: Response<OutputBlogType[]>) => {
     const allBlogs = blogsRepository.getBlogs()

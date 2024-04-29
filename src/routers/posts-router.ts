@@ -5,11 +5,14 @@ import {
     getPostsController,
     updatePostByIdController
 } from "../controllers/posts-controller";
+import {authMiddleware} from "../middlewares/auth-middleware";
+import {inputValidationMiddleware} from "../middlewares/input-validation-middlware";
+import {postsInputValidationMiddleware} from "../middlewares/posts-input-validation-middleware";
 
 export const postsRouter = Router()
 
 postsRouter.get('/', getPostsController)
-postsRouter.post('/', createPostController)
+postsRouter.post('/', authMiddleware, postsInputValidationMiddleware, inputValidationMiddleware, createPostController)
 postsRouter.get('/:id', getPostByIdController)
-postsRouter.put('/:id', updatePostByIdController)
-postsRouter.delete('/:id', deletePostByIdController)
+postsRouter.put('/:id', authMiddleware, postsInputValidationMiddleware, inputValidationMiddleware, updatePostByIdController)
+postsRouter.delete('/:id', authMiddleware, deletePostByIdController)
